@@ -1,0 +1,9 @@
+.l-start {
+    &__contents {
+        margin-top: 80px;
+    }
+    &__menu {
+        display: flex;
+        justify-content: space-around;
+    }
+}

@@ -1,0 +1,43 @@
+.activeCoinTweetsInfo {
+    background: rgba(63, 111, 84, 0.4);
+}
+
+.u-br {
+    display: none;
+}
+
+.u-followed {
+    background-color: red;
+}
+
+.u-twitter-link {
+    color: rgb(29, 155, 240);
+}
+
+.u-catch {
+    margin: 36px 0 20px;
+    color: black;
+    font-size: $font-size_xxl;
+    & p {
+        font-weight: bold;
+    }
+    &-sub {
+        color: rgba(0, 0, 0, 0.54);
+        font-size: $font-size_default;
+        margin-bottom: 30px;
+        line-height: 2.5rem;
+    }
+}
+
+.u-border-b {
+    border-bottom: 1px solid gray;
+}
+
+@media screen and (max-width: 481px) {
+    .u-catch {
+        &-sub {
+            font-size: $font-size_default;
+            line-height: 2rem;
+        }
+    }
+}
