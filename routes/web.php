@@ -50,7 +50,8 @@ Route::namespace('Twitter')->group(function () {
 
     Route::prefix('twitter')->group(function () {
         Route::get('/follow', 'TwitterFollowController@index')->name('twitter.follow')->middleware('auth', 'twitterAuth');
-        Route::get('/coin_trend', 'TwitterCoinTrendController@index')->name('twitter.coin_trend')->middleware('auth');
+        Route::get('/coin_trend', 'TwitterCoinTrendController@index')->name('twitter.coin_trend');
+        Route::get('/wait', 'TwitterWaitController@index')->name('twitter.follow.follow_wait');
     });
 });
 

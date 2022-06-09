@@ -1,21 +1,21 @@
-/*
-src 参照元を指定
-dest 出力さきを指定
-watch ファイル監視
-series(直列処理)とparallel(並列処理)
-*/
-const { src, dest, watch, series, parallel } = require('gulp');
+import gulp from 'gulp';
+import webpackConfig from '../webpack.config.js';
+import webpack from 'webpack-stream';
+import browserSync from 'browser-sync';
+import notify from 'gulp-notify';
+import plumber from 'gulp-plumber';
 
-// プラグインを呼び出し
-const sass = require('gulp-sass')(require('sass'));
+// gulpタスクの作成
+gulp.task('build', function() {
+    gulp.src('resources/js/app.js')
+        .pipe(plumber({
+            errorHandler: notify.onError("Error: <%= error.message %>")
+        }))
+        .pipe(webpack(webpackConfig))
+        .pipe(gulp.dest('public/js/app.js'));
+});
 
-// プラグインの処理をまとめる
-// 各処理をpipeメソッドで繋げる
-const cssSass = () => {
-    return src('./resources/sass/app.scss') //コンパイル元
-        .pipe(sass({ outputStyle: 'expanded' }))
-        .pipe(dest('./public/css/')) //コンパイル先
-}
-
-// タスクをまとめて実行
-exports.default = series(cssSass);
+// Gulpを使ったファイルの監視
+gulp.task('default', ['build'], function() {
+    gulp.watch('./resources/js/*', ['build']);
+});

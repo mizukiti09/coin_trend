@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\Coin;
-use App\Facades\Twitter;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Http\Middleware\CleanArchitectureMiddleware;
 
 class HomeController extends Controller

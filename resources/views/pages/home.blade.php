@@ -33,8 +33,6 @@
                             <p class="u-catch-sub">
                                 twitterと連携し、仮想通貨に関するアカウントの自動フォローやトレンド情報を入手。
                             </p>
-
-                            <p><i class="fas fa-external-link-alt arrow-link main-cl"></i></p>
                         </a>
                     </div>
                 </li>
@@ -50,8 +48,6 @@
                             <p class="u-catch-sub">
                                 現在出回っている仮想通貨の銘柄毎の24時間での最高取引価格、24時間での最安取引価格情報の提供。
                             </p>
-
-                            <p><i class="fas fa-external-link-alt arrow-link"></i></p>
                         </a>
                     </div>
                 </li>
@@ -65,8 +61,6 @@
                                 <p>Googleニュース</p>
                             </div>
                             <p class="u-catch-sub">「仮想通貨」というキーワードでニュースを検索し、仮想通貨関連のニュースを一覧表示</p>
-
-                            <p><i class="fas fa-external-link-alt arrow-link"></i></p>
                         </a>
                     </div>
                 </li>

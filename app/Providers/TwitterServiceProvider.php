@@ -2,23 +2,30 @@
 
 namespace App\Providers;
 
+
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Http\ViewComposers\UserComposer;
 use packages\Infrastructure\Coin\CoinTweetRepository;
 use App\Http\Presenters\Twitter\TwitterFollowPresenter;
 use App\Http\ViewComposers\TwitterFollowAccountComposer;
+use packages\Infrastructure\User\Crone\CroneUserRepository;
 use packages\Domain\Domain\Coin\CoinTweetRepositoryInterface;
 use packages\Domain\Application\Twitter\TwitterAuthInteractor;
 use packages\UseCase\Twitter\Auth\TwitterAuthUseCaseInterface;
 use packages\Domain\Application\Twitter\TwitterFollowInteractor;
+use packages\Domain\Domain\User\Crone\CroneUserRepositoryInterface;
 use packages\UseCase\Twitter\Follow\TwitterFollowPresenterInterface;
 use packages\UseCase\Twitter\Follow\TwitterAutoFollowUseCaseInterface;
 use packages\Infrastructure\User\TwitterAuth\UserTwitterAuthRepository;
 use packages\UseCase\Twitter\Follow\TwitterClickFollowUseCaseInterface;
 use packages\Infrastructure\User\TwitterAuth\UserTwitterFollowRepository;
+use packages\Infrastructure\Twitter\Crone\CronFollowAccountsCountRepository;
 use packages\Domain\Domain\User\TwitterAuth\UserTwitterAuthRepositoryInterface;
 use packages\Domain\Domain\User\TwitterAuth\UserTwitterFollowRepositoryInterface;
+use packages\Infrastructure\Twitter\FollowAccounts\TwitterFollowAccountsRepository;
+use packages\Domain\Domain\Twitter\Crone\CronFollowAccountsCountRepositoryInterface;
+use packages\Domain\Domain\Twitter\FollowAccounts\TwitterFollowAccountsRepositoryInterface;
 
 class TwitterServiceProvider extends ServiceProvider
 {
@@ -56,12 +63,15 @@ class TwitterServiceProvider extends ServiceProvider
      * @var array
      */
     public $bindings = [
-        UserTwitterAuthRepositoryInterface::class   => UserTwitterAuthRepository::class,
-        UserTwitterFollowRepositoryInterface::class => UserTwitterFollowRepository::class,
-        TwitterFollowPresenterInterface::class      => TwitterFollowPresenter::class,
-        TwitterAuthUseCaseInterface::class          => TwitterAuthInteractor::class,
-        TwitterClickFollowUseCaseInterface::class   => TwitterFollowInteractor::class,
-        TwitterAutoFollowUseCaseInterface::class    => TwitterFollowInteractor::class,
-        CoinTweetRepositoryInterface::class         => CoinTweetRepository::class,
+        UserTwitterAuthRepositoryInterface::class         => UserTwitterAuthRepository::class,
+        UserTwitterFollowRepositoryInterface::class       => UserTwitterFollowRepository::class,
+        TwitterFollowPresenterInterface::class            => TwitterFollowPresenter::class,
+        TwitterAuthUseCaseInterface::class                => TwitterAuthInteractor::class,
+        TwitterClickFollowUseCaseInterface::class         => TwitterFollowInteractor::class,
+        TwitterAutoFollowUseCaseInterface::class          => TwitterFollowInteractor::class,
+        TwitterFollowAccountsRepositoryInterface::class   => TwitterFollowAccountsRepository::class,
+        CronFollowAccountsCountRepositoryInterface::class => CronFollowAccountsCountRepository::class,
+        CoinTweetRepositoryInterface::class               => CoinTweetRepository::class,
+        CroneUserRepositoryInterface::class               => CroneUserRepository::class,
     ];
 }

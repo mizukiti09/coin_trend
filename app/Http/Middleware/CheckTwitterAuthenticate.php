@@ -16,10 +16,9 @@ class CheckTwitterAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->twitter === 1) {
+        if (Auth::user()->twitter == 1) {
             return $next($request);
         }
         return redirect('/login/twitter');
-
     }
 }

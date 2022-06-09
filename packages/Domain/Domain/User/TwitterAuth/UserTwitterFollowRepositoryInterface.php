@@ -23,4 +23,19 @@ interface UserTwitterFollowRepositoryInterface
      */
     // 1日のフォロー上限のチェックをする(1日にフォローできる上限が1000フォロー)
     public function followCountUpperCheck($user_id);
+
+    // 自動フォローフラグ取得
+    public function getAutoFollowFlg();
+
+    /**
+     * @param $user_id
+     */
+    // 自動フォローフラグを1にする
+    public function updateAutoFollowFlgTrue($user_id);
+
+    /**
+     * @param $user_id
+     */
+    // 自動フォローフラグを0にする
+    public function updateAutoFollowFlgFalse($user_id);
 }

@@ -2,22 +2,36 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Facades\Twitter;
+use Exception;
 use Illuminate\View\View;
+use packages\Domain\Domain\User\TwitterAuth\UserTwitterFollowRepositoryInterface;
+use packages\Domain\Domain\Twitter\FollowAccounts\TwitterFollowAccountsRepositoryInterface;
 
 class TwitterFollowAccountComposer
 {
-    protected $twitter;
+    protected $t_repository;
+    protected $u_repository;
 
-    public function __construct(Twitter $twitter)
-    {
-        $this->twitter = $twitter;
+    public function __construct(
+        TwitterFollowAccountsRepositoryInterface $t_repository,
+        UserTwitterFollowRepositoryInterface $u_Repository
+    ) {
+        $this->t_repository = $t_repository;
+        $this->u_repository = $u_Repository;
     }
 
     public function compose(View $view)
     {
-        $accounts = Twitter::followAccounts();
-        $accounts = Twitter::followCheck($accounts);
-        $view->with('accounts', $accounts);
+        try {
+            $accounts      = $this->t_repository->getFollowAccountsRandomSort();
+            $autoFollowFlg = $this->u_repository->getAutoFollowFlg();
+
+            $view->with([
+                'accounts'      => $accounts,
+                'autoFollowFlg' => $autoFollowFlg,
+            ]);
+        } catch (Exception $e) {
+            return redirect()->route('twitter.follow.follow_wait');
+        }
     }
 }

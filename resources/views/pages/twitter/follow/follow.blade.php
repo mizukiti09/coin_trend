@@ -12,13 +12,15 @@
         </div>
 
         <twitter-auto-follow-btn
-            :user_id="{{ $user['id'] }}">
+            :user_id="{{ $user['id'] }}"
+            :auto_follow_flg="{{ $autoFollowFlg }}">
         </twitter-auto-follow-btn>
 
         <div class="c-section__container">
             <twitter-account 
                 :accounts="{{ json_encode($accounts) }}"
-                :user_id="{{ $user['id'] }}">
+                :user_id="{{ $user['id'] }}"
+                :auto_follow_flg="{{ $autoFollowFlg }}">
             </twitter-account>
         </div>
     </section>

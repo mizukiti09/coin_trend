@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Laravel\Socialite\Facades\Socialite;
-use App\Http\Middleware\CleanArchitectureMiddleware;
+use packages\Domain\Domain\User\TwitterAuth\UserTwitterAuthRepositoryInterface;
 
 class Twitter
 {
@@ -15,14 +15,26 @@ class Twitter
     private $access_token;
     private $access_token_secret;
     private $connection;
+    private $userTwitterAuthRepository;
 
-    public function __construct()
+    public function __construct(UserTwitterAuthRepositoryInterface $userTwitterAuthRepository)
     {
-        $this->client_id = config('services.twitter.client_id');
-        $this->client_secret = config('services.twitter.client_secret');
-        $this->access_token = config('services.twitter.access_token');
-        $this->access_token_secret = config('services.twitter.access_token_secret');
-        $this->connection = new TwitterOAuth($this->client_id, $this->client_secret, $this->access_token, $this->access_token_secret);
+        $this->client_id           = config('services.twitter.client_id');
+        $this->client_secret       = config('services.twitter.client_secret');
+        // $this->access_token        = session('access_token');
+        // $this->access_token_secret = session('access_token_secret');
+        $this->userTwitterAuthRepository = $userTwitterAuthRepository;
+        $this->connection          = new TwitterOAuth($this->client_id, $this->client_secret, $this->access_token, $this->access_token_secret);
+    }
+
+    public function setAccessToken($user_id)
+    {
+        $this->access_token = $this->userTwitterAuthRepository->getAccessToken($user_id);
+    }
+
+    public function setAccessTokenSecret($user_id)
+    {
+        $this->access_token_secret = $this->userTwitterAuthRepository->getAccessTokenSecret($user_id);
     }
 
     // twitterAPI接続
@@ -52,9 +64,8 @@ class Twitter
     }
 
     // フォローできるアカウント
-    public function followAccounts()
+    public function followAccounts($page)
     {
-        $page = mt_rand(1, 51);
         $accounts = $this->connection->get('users/search', array(
             "q" => "仮想通貨",
             "page" => $page,
@@ -62,84 +73,23 @@ class Twitter
             "tweet_mode" => "extended",
             "include_entities" => true,
         ));
-
-        if (isset($accounts->errors)) {
-            $warningMessage = '15分お待ち頂いてからご利用ください';
-            CleanArchitectureMiddleware::$view = view('pages.twitter.follow.follow_wait', compact('warningMessage'));
-        }
 
         return $accounts;
     }
 
-    public function followAccountsNew()
-    {
-
-        $page = 51;
-        $accounts = $this->connection->get('users/search', array(
-            "q" => "仮想通貨",
-            "page" => $page,
-            "count" => 20,
-            "tweet_mode" => "extended",
-            "include_entities" => true,
-        ));
-
-        Log::info('1回目');
-        Log::info($accounts);
-
-
-        if (isset($accounts->errors)) {
-            $warningMessage = '15分お待ち頂いてからご利用ください';
-            CleanArchitectureMiddleware::$view = view('pages.twitter.follow.follow_wait', compact('warningMessage'));
-        }
-
-        sleep(930);
-
-        $page = 52;
-        $accounts2 = $this->connection->get('users/search', array(
-            "q" => "仮想通貨",
-            "page" => $page,
-            "count" => 20,
-            "tweet_mode" => "extended",
-            "include_entities" => true,
-        ));
-
-        Log::info('2回目');
-        Log::info($accounts2);
-    }
-
-
     // フォローページにてまだフォローしていないアカウントを選別
     public function followCheck($accounts)
     {
-        if (count($accounts) === 0) {
-            $page = mt_rand(1, 51);
+        $currentFollows = $this->currentFollows();
 
-            $accounts = $this->connection->get('users/search', array(
-                "q" => "仮想通貨",
-                "page" => $page,
-                "count" => 20,
-                "tweet_mode" => "extended",
-                "include_entities" => true,
-            ));
-
-            return $accounts;
-        } else {
-            $currentFollows = $this->currentFollows();
-
-            if (isset($currentFollows->errors)) {
-                $warningMessage = '15分お待ち頂いてからご利用ください';
-                CleanArchitectureMiddleware::$view = view('pages.twitter.follow.follow_wait', compact('warningMessage'));
+        $yetFollows = [];
+        // // まだフォローしていないアカウントを選別してそれを返す
+        foreach ($accounts as $target) {
+            if (!in_array($target->twitter_id, $currentFollows->ids)) {
+                array_push($yetFollows, $target);
             }
-
-            $yetFollows = [];
-            // // まだフォローしていないアカウントを選別してそれを返す
-            foreach ($accounts as $target) {
-                if (!in_array($target->id, $currentFollows->ids)) {
-                    array_push($yetFollows, $target);
-                }
-            }
-            return $yetFollows;
         }
+        return $yetFollows;
     }
 
 

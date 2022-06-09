@@ -16,9 +16,11 @@ class UserTwitterAuthRepository implements UserTwitterAuthRepositoryInterface
         DB::table('users')
             ->where('id', Auth::id())
             ->update([
-                'twitter' => true,
-                'profile_photo_path' => $twitterAuth->getAvatar(),
-                'nickname' => $twitterAuth->getNickname(),
+                'twitter'             => true,
+                'profile_photo_path'  => $twitterAuth->getAvatar(),
+                'nickname'            => $twitterAuth->getNickname(),
+                'access_token'        => $twitterAuth->token,
+                'access_token_secret' => $twitterAuth->tokenSecret,
             ]);
     }
 
@@ -45,4 +47,29 @@ class UserTwitterAuthRepository implements UserTwitterAuthRepositoryInterface
             ]);
     }
 
+    public function getAccessToken($user_id)
+    {
+        $result =  DB::table('users')
+            ->where('id', $user_id)
+            ->select([
+                'access_token',
+            ])
+            ->get()
+            ->first();
+
+        return $result->access_token;
+    }
+
+    public function getAccessTokenSecret($user_id)
+    {
+        $result =  DB::table('users')
+            ->where('id', $user_id)
+            ->select([
+                'access_token_secret',
+            ])
+            ->get()
+            ->first();
+
+        return $result->access_token_secret;
+    }
 }

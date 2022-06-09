@@ -61,10 +61,42 @@ class UserTwitterFollowRepository implements UserTwitterFollowRepositoryInterfac
             ->first();
         $followCount = $result->follow_count;
 
+        Log::info($followCount);
+
         if ($followCount < 1000) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public function getAutoFollowFlg()
+    {
+        $result = DB::table('users')
+            ->where('id', Auth::id())
+            ->select('auto_follow_flg')
+            ->get()
+            ->first();
+        $autoFollowFlg = $result->auto_follow_flg;
+
+        return $autoFollowFlg;
+    }
+
+    public function updateAutoFollowFlgTrue($user_id)
+    {
+        DB::table('users')
+            ->where('id', $user_id)
+            ->update([
+                'auto_follow_flg' => 1,
+            ]);
+    }
+
+    public function updateAutoFollowFlgFalse($user_id)
+    {
+        DB::table('users')
+            ->where('id', $user_id)
+            ->update([
+                'auto_follow_flg' => 0,
+            ]);
     }
 }

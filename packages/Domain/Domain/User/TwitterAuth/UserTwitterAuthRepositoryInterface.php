@@ -12,4 +12,10 @@ interface UserTwitterAuthRepositoryInterface
     public function find();
 
     public function logout();
+
+    // ユーザーのアクセストークン取得
+    public function getAccessToken($user_id);
+
+    // ユーザーのアクセストークンシークレット取得
+    public function getAccessTokenSecret($user_id);
 }

@@ -3,7 +3,6 @@
 namespace App\Console;
 
 use Illuminate\Support\Facades\Log;
-use App\Console\Commands\CoinTweets;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\CoinTweets::class,
-        \App\Console\Commands\SampleCommand::class,
+        \App\Console\Commands\FollowAccounts::class,
+        \App\Console\Commands\AutoFollow::class,
     ];
 
     /**
@@ -34,10 +34,25 @@ class Kernel extends ConsoleKernel
             })
             ->onFailure(function () {
                 Log::error('定期処理:coinTweets:失敗');
-            });;
+            });
 
-        $schedule->command('command:sample')
-            ->hourlyAt(10);
+        $schedule->command('command:followAccounts')
+            ->everyFifteenMinutes()
+            ->onSuccess(function () {
+                Log::debug('定期処理:followAccounts:成功');
+            })
+            ->onFailure(function () {
+                Log::error('定期処理:followAccounts:失敗');
+            });
+
+        $schedule->command('command:autoFollow')
+            ->everyMinute()
+            ->onSuccess(function () {
+                Log::debug('自動フォロー:成功');
+            })
+            ->onFailure(function () {
+                Log::error('自動フォロ:失敗');
+            });
     }
 
     /**

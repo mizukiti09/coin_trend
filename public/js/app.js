@@ -1977,11 +1977,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['accounts', 'user_id'],
+  props: ['accounts', 'user_id', 'auto_follow_flg'],
   data: function data() {
     return {
-      clickFollowCount: 0
+      clickFollowCount: 0,
+      showAccounts: true,
+      showWait: false
     };
   },
   methods: {
@@ -2000,8 +2010,8 @@ __webpack_require__.r(__webpack_exports__);
         ref.style.display = 'none';
 
         if (_this.clickFollowCount === _this.accounts.length) {
-          console.log('リロード');
-          window.location.reload();
+          _this.showAccounts = false;
+          _this.showWait = true;
         }
       })["catch"](function (error) {
         console.log('followは正常に起動していません。');
@@ -2036,32 +2046,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user_id'],
+  props: ['user_id', 'auto_follow_flg'],
   data: function data() {
     return {
       btnState: false,
       btnText: 'Follow Start !!'
     };
   },
+  mounted: function mounted() {
+    if (this.auto_follow_flg === 0) {
+      this.btnState = false;
+      this.btnText = 'Follow Start !!';
+    } else if (this.auto_follow_flg === 1) {
+      this.btnState = true;
+      this.btnText = 'Follow Stop';
+    }
+  },
   methods: {
     // クリックしたら自動フォロー
     autoFollow: function autoFollow() {
-      this.btnState = !this.btnState;
-
-      if (this.btnText === 'Follow Start !!') {
-        this.btnText = 'Follow Stop';
-      } else {
-        this.btnText = 'Follow Start !!';
-      }
-
       var formData = new FormData();
       formData.append('user_id', this.user_id);
-      this.$axios.post('/api/twitter/autoFollow', formData).then(function (res) {
-        console.log(res);
-      })["catch"](function (error) {
-        console.log('autoFollowは正常に起動していません。');
-        console.log(error);
-      });
+      formData.append('auto_follow_flg', this.auto_follow_flg);
+
+      if (this.auto_follow_flg === 0) {
+        console.log('自動フォロー');
+        this.$axios.post('/api/twitter/autoFollow', formData).then(function (res) {
+          console.log(res);
+          window.location.reload(false);
+        })["catch"](function (error) {
+          console.log('autoFollowは正常に起動しました。');
+          console.log(error);
+        });
+      } else if (this.auto_follow_flg === 1) {
+        console.log('自動フォローストップ');
+        this.$axios.post('/api/twitter/stopAutoFollow', formData).then(function (res) {
+          console.log(res);
+          window.location.reload(false);
+        })["catch"](function (error) {
+          console.log('stopAutoFollowは正常に起動していません。');
+          console.log(error);
+        });
+      }
     }
   }
 });
@@ -34757,6 +34783,81 @@ return jQuery;
 
 /***/ }),
 
+/***/ "./node_modules/node-libs-browser/node_modules/timers-browserify/main.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/node-libs-browser/node_modules/timers-browserify/main.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(scope, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(/*! setimmediate */ "./node_modules/setimmediate/setImmediate.js");
+// On some exotic environments, it's not clear which object `setimmediate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
 /***/ "./node_modules/popper.js/dist/esm/popper.js":
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
@@ -37780,81 +37881,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/timers-browserify/main.js":
-/*!************************************************!*\
-  !*** ./node_modules/timers-browserify/main.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
-            (typeof self !== "undefined" && self) ||
-            window;
-var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(scope, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(/*! setimmediate */ "./node_modules/setimmediate/setImmediate.js");
-// On some exotic environments, it's not clear which object `setimmediate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof global !== "undefined" && global.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof global !== "undefined" && global.clearImmediate) ||
-                         (this && this.clearImmediate);
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GoogleNews.vue?vue&type=template&id=0c9be152&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GoogleNews.vue?vue&type=template&id=0c9be152& ***!
@@ -37917,113 +37943,153 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    _vm._l(_vm.accounts, function (data, i) {
-      return _c(
-        "div",
-        {
-          key: i,
-          ref: "account",
-          refInFor: true,
-          staticClass: "p-follow__account c-section__item",
-        },
-        [
-          _c("div", { staticClass: "p-follow__info" }, [
-            _c("div", { staticClass: "p-follow__avatar" }, [
-              _c(
-                "a",
-                { attrs: { href: "https://twitter.com/" + data.screen_name } },
-                [
-                  _c("img", {
-                    staticClass: "u-img",
-                    attrs: {
-                      src: data.profile_image_url.replace("_normal.", "."),
-                      alt: "",
-                    },
-                  }),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "p-follow__name u-border-b" }, [
-              _vm._v(_vm._s(data.name)),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "p-follow__nickname u-border-b" }, [
-              _vm._v("@" + _vm._s(data.screen_name)),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "p-follow__status" }, [
-              _c("div", { staticClass: "p-follow__followCount" }, [
-                _vm._v(_vm._s(data.friends_count) + " フォロー中"),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "p-follow__followerCount" }, [
-                _vm._v(_vm._s(data.followers_count) + " フォロワー数"),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "c-btn-follow",
-                on: {
-                  click: function ($event) {
-                    return _vm.follow(data.screen_name, i)
-                  },
+  return _c("div", [
+    _vm.auto_follow_flg === 0
+      ? _c("div", [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.showAccounts,
+                  expression: "showAccounts",
                 },
-              },
-              [_vm._v("フォロー")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-follow__info" }, [
-            _c("div", { staticClass: "p-follow__prof" }, [
-              _c("div", { staticClass: "p-follow__title u-border-b" }, [
-                _vm._v("\n                    プロフィール\n                "),
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(data.description))]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "p-follow__tweet" }, [
-              _c("div", { staticClass: "p-follow__title u-border-b" }, [
-                _vm._v(
-                  "\n                    最新のツイート\n                "
-                ),
-              ]),
-              _vm._v(" "),
-              data.status.retweeted_status
-                ? _c("div", [
-                    _vm._v(_vm._s(data.status.retweeted_status.full_text)),
-                  ])
-                : _c("div", [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(data.status.full_text) +
-                        "\n\n                    "
-                    ),
-                    data.status.entities.media
-                      ? _c("div", { staticClass: "p-follow__tweet__img" }, [
+              ],
+            },
+            _vm._l(_vm.accounts, function (data, i) {
+              return _c(
+                "div",
+                {
+                  key: i,
+                  ref: "account",
+                  refInFor: true,
+                  staticClass: "p-follow__account c-section__item",
+                },
+                [
+                  _c("div", { staticClass: "p-follow__info" }, [
+                    _c("div", { staticClass: "p-follow__avatar" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: "https://twitter.com/" + data.screen_name,
+                          },
+                        },
+                        [
                           _c("img", {
                             staticClass: "u-img",
                             attrs: {
-                              src: data.status.entities.media[0]
-                                .media_url_https,
+                              src: data.profile_image_url.replace(
+                                "_normal.",
+                                "."
+                              ),
                               alt: "",
                             },
                           }),
-                        ])
-                      : _vm._e(),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "p-follow__name u-border-b" }, [
+                      _vm._v(_vm._s(data.name)),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "p-follow__nickname u-border-b" },
+                      [_vm._v("@" + _vm._s(data.screen_name))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "p-follow__status" }, [
+                      _c("div", { staticClass: "p-follow__followCount" }, [
+                        _vm._v(_vm._s(data.friends_count) + " フォロー中"),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-follow__followerCount" }, [
+                        _vm._v(_vm._s(data.followers_count) + " フォロワー数"),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "c-btn-follow",
+                        on: {
+                          click: function ($event) {
+                            return _vm.follow(data.screen_name, i)
+                          },
+                        },
+                      },
+                      [_vm._v("フォロー")]
+                    ),
                   ]),
-            ]),
-          ]),
-        ]
-      )
-    }),
-    0
-  )
+                  _vm._v(" "),
+                  _c("div", { staticClass: "p-follow__info" }, [
+                    _c("div", { staticClass: "p-follow__prof" }, [
+                      _c("div", { staticClass: "p-follow__title u-border-b" }, [
+                        _vm._v(
+                          "\n                            プロフィール\n                        "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(data.description))]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "p-follow__tweet" }, [
+                      _c("div", { staticClass: "p-follow__title u-border-b" }, [
+                        _vm._v(
+                          "\n                            最新のツイート\n                        "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(data.full_text) +
+                            "\n        \n                            "
+                        ),
+                        data.media_url_https
+                          ? _c("div", { staticClass: "p-follow__tweet__img" }, [
+                              _c("img", {
+                                staticClass: "u-img",
+                                attrs: { src: data.media_url_https, alt: "" },
+                              }),
+                            ])
+                          : _vm._e(),
+                      ]),
+                    ]),
+                  ]),
+                ]
+              )
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.showWait,
+                  expression: "showWait",
+                },
+              ],
+            },
+            [
+              _c("div", { staticClass: "c-section__title" }, [
+                _vm._v(
+                  "\n                15分お待ちいただいてからフォローをお願いします\n            "
+                ),
+              ]),
+            ]
+          ),
+        ])
+      : _vm._e(),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50583,7 +50649,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../../timers-browserify/main.js */ "./node_modules/timers-browserify/main.js").setImmediate))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../../node-libs-browser/node_modules/timers-browserify/main.js */ "./node_modules/node-libs-browser/node_modules/timers-browserify/main.js").setImmediate))
 
 /***/ }),
 
@@ -51251,8 +51317,8 @@ $(window).on('scroll', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/mizuki/Desktop/webkatu_last_quest/coin_api/src/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/mizuki/Desktop/webkatu_last_quest/coin_api/src/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/coin_api/src/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/coin_api/src/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
