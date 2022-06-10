@@ -1,5 +1,15 @@
 <template>
     <div>
+        <div v-if="auto_follow_flg == 0" class="c-section__description">
+            <h2>Twitter上の『仮想通貨』関連ユーザーをフォローし、<br>情報のキャッチアップ</h2>
+            <br>
+            <span>* Follow Start ! クリックするとおよそ1分都度に１フォロー、自動フォローを実施します。</span>
+        </div>
+        <div v-else class="c-section__description">
+            <h2>自動フォロー中です</h2>
+            <br>
+            <span>* Follow Stop をクリックすると自動フォローは止まります。</span>
+        </div>
         <button 
             class="c-btn-autoFollow" 
             :class="{ autoFollowBtnColor: btnState }" 

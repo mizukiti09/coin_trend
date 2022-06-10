@@ -4,6 +4,7 @@ namespace App\Http\ViewComposers;
 
 use Exception;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 use packages\Domain\Domain\User\TwitterAuth\UserTwitterFollowRepositoryInterface;
 use packages\Domain\Domain\Twitter\FollowAccounts\TwitterFollowAccountsRepositoryInterface;
 
@@ -22,16 +23,12 @@ class TwitterFollowAccountComposer
 
     public function compose(View $view)
     {
-        try {
-            $accounts      = $this->t_repository->getFollowAccountsRandomSort();
-            $autoFollowFlg = $this->u_repository->getAutoFollowFlg();
+        $accounts      = $this->t_repository->getFollowAccountsRandomSort();
+        $autoFollowFlg = $this->u_repository->getAutoFollowFlg();
 
-            $view->with([
-                'accounts'      => $accounts,
-                'autoFollowFlg' => $autoFollowFlg,
-            ]);
-        } catch (Exception $e) {
-            return redirect()->route('twitter.follow.follow_wait');
-        }
+        $view->with([
+            'accounts'      => $accounts,
+            'autoFollowFlg' => $autoFollowFlg,
+        ]);
     }
 }

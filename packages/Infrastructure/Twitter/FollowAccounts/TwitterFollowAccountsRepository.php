@@ -95,7 +95,7 @@ class TwitterFollowAccountsRepository implements TwitterFollowAccountsRepository
             $param
         );
 
-        $currentFollows = Twitter::getConnection()->get('friends/ids', array(
+        $currentFollows = Twitter::getAuthConnection($user_id)->get('friends/ids', array(
             'screen_name' => $nickname,
         ));
 

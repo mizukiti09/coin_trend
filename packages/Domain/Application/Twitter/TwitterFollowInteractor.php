@@ -27,10 +27,8 @@ class TwitterFollowInteractor implements TwitterClickFollowUseCaseInterface, Twi
     {
         $this->u_repository->userFollowCountResetBy24HoursAgo($user_id);
         if ($this->u_repository->followCountUpperCheck($user_id) == true) {
-            Twitter::setAccessToken($user_id);
-            Twitter::setAccessTokenSecret($user_id);
             Log::info($nickname);
-            $response = Twitter::getConnection()->post('friendships/create', array(
+            $response = Twitter::getAuthConnection($user_id)->post('friendships/create', array(
                 "screen_name" => $nickname,
             ));
 
@@ -52,7 +50,7 @@ class TwitterFollowInteractor implements TwitterClickFollowUseCaseInterface, Twi
         if ($this->u_repository->followCountUpperCheck($user_id) == true) {
             $account = $this->t_repository->getAutoFollowAccountRandomSort($user_id);
 
-            $response = Twitter::getConnection()->post('friendships/create', array(
+            $response = Twitter::getAuthConnection($user_id)->post('friendships/create', array(
                 "screen_name" => $account->screen_name,
             ));
 

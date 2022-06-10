@@ -14,17 +14,21 @@ class Twitter
     private $client_secret;
     private $access_token;
     private $access_token_secret;
-    private $connection;
     private $userTwitterAuthRepository;
 
     public function __construct(UserTwitterAuthRepositoryInterface $userTwitterAuthRepository)
     {
         $this->client_id           = config('services.twitter.client_id');
         $this->client_secret       = config('services.twitter.client_secret');
-        // $this->access_token        = session('access_token');
-        // $this->access_token_secret = session('access_token_secret');
+        $this->access_token        = config('services.twitter.access_token');
+        $this->access_token_secret = config('services.twitter.access_token_secret');
+        $this->connection          = new TwitterOAuth(
+            $this->client_id,
+            $this->client_secret,
+            $this->access_token,
+            $this->access_token_secret,
+        );
         $this->userTwitterAuthRepository = $userTwitterAuthRepository;
-        $this->connection          = new TwitterOAuth($this->client_id, $this->client_secret, $this->access_token, $this->access_token_secret);
     }
 
     public function setAccessToken($user_id)
@@ -35,6 +39,17 @@ class Twitter
     public function setAccessTokenSecret($user_id)
     {
         $this->access_token_secret = $this->userTwitterAuthRepository->getAccessTokenSecret($user_id);
+    }
+
+    // twitterAPI接続
+    public function getAuthConnection($user_id)
+    {
+        return new TwitterOAuth(
+            $this->client_id,
+            $this->client_secret,
+            $this->userTwitterAuthRepository->getAccessToken($user_id),
+            $this->userTwitterAuthRepository->getAccessTokenSecret($user_id),
+        );
     }
 
     // twitterAPI接続
@@ -56,7 +71,7 @@ class Twitter
         $authUser = Auth::user();
         $nickname = $authUser->nickname;
 
-        $followAccounts = $this->connection->get('friends/ids', array(
+        $followAccounts = $this->getAuthConnection($authUser->id)->get('friends/ids', array(
             'screen_name' => $nickname,
         ));
 
