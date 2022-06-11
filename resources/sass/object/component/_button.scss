@@ -61,7 +61,7 @@
         font-family: cursive;
         background: linear-gradient(45deg, gray);
         &:hover {
-            background: linear-gradient(45deg, rgba(39, 164, 77, 0.6));
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
             transition: .3s;
         }
         &:active {
@@ -72,7 +72,7 @@
     }
     &-follow {
         color: #fff;
-        background: rgba(29, 155, 24, 0.60);
+        background: rgba(36, 209, 228, 0.6);
         text-align: center;
         padding: 2px;
         border-radius: 30px;
@@ -81,17 +81,17 @@
     }
     &-follow:hover {
         cursor: pointer;
-        background: rgba(125, 200, 2, 0.650);
+        background: rgba(125, 200, 2, 0.65);
         transition: .3s;
     }
 }
 
 .autoFollowBtnColor {
     transition: .3s;
-    background: linear-gradient(45deg, rgba(255, 78, 19, 0.6));
+    background: rgba(255, 78, 19, 0.6);
 }
 
 .autoFollowBtnColor:hover {
     transition: .3s;
-    background: linear-gradient(45deg, rgba(255, 78, 19, 0.6));
+    background: rgba(255, 78, 19, 0.3);
 }
