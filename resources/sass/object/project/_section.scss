@@ -86,7 +86,7 @@
 
 .p-start {
     content: "";
-    background-image: url(./../images/start_back.png);
+    background-image: url(./../../../images/start_back.png);
     background-size: cover;
     background-position: center center;
     background-color: rgba(255, 255, 255, 0.5);
@@ -225,7 +225,7 @@
             font-size: $font-size_xl;
             line-height: 40px;
             font-weight: bold;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
             color: #fff;
         }
         &__right {
@@ -235,23 +235,23 @@
             border-bottom: 1px solid #fff;
             border-right: 1px solid #fff;
             width: 10%;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
         }
         &__name {
             width: 100%;
             border-bottom: 1px solid #fff;
             overflow-x: scroll;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
         }
         &__tweets {
             border-bottom: 1px solid #fff;
             width: 100%;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
         }
         &__price {
             border-bottom: 1px solid #fff;
             width: 100%;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
         }
     }
     &__each {
@@ -272,7 +272,7 @@
                 line-height: 40px;
                 border: 1px solid #fff;
                 text-align: center;
-                background: rgb(161 195 224);
+                background: rgb(161, 195, 224);
                 font-weight: bold;
             }
             &__body {
@@ -296,30 +296,30 @@
             font-size: $font-size_xl;
             line-height: 40px;
             font-weight: bold;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
             color: #fff;
         }
         &__number {
             border-bottom: 1px solid #fff;
             border-right: 1px solid #fff;
             width: 10%;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
         }
         &__name {
             width: 100%;
             border-bottom: 1px solid #fff;
             overflow-x: scroll;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
         }
         &__tweets {
             border-bottom: 1px solid #fff;
             width: 100%;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
         }
         &__price {
             border-bottom: 1px solid #fff;
             width: 100%;
-            background: linear-gradient(-45deg, rgb(246 255 0 / 80%), rgb(15 149 149)), url();
+            background: linear-gradient(-45deg, rgba(246, 255, 0, 0.8), rgba(15, 149, 149, 0.8)), url();
         }
     }
 }

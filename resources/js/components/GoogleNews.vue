@@ -11,7 +11,8 @@
 export default {
     props: ['list_gn'],
     data: function() {
-
+        return {
+        }
     },
     methods: {
     },

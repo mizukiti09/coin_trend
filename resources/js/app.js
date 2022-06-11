@@ -47,7 +47,7 @@ const app = new Vue({
 });
 
 
-// ハンバーガーメニュ 
+// ハンバーガーメニュ です！
 $(".c-btn-open").on('click', function() {
     $(this).toggleClass('active');
     $(".c-nav").toggleClass('panelactive');

@@ -79,19 +79,19 @@
                 <div class="u-catch ">
                     <p>まとめて<br class="text-sp">フォロー</p>
                 </div>
-                <p class="u-catch-sub">自動で仮想通貨関連のアカウントを自動フォロー</p>
+                <a href="{{ route('twitter.follow') }}"><p class="u-catch-sub">自動で仮想通貨関連のアカウントを自動フォロー</p></a>
             </li>
             <li class="p-start__item u-fade-up">
                 <div class="u-catch">
                     <p>仮想通貨<br class="u-blockNone">トレンド情報</p>
                 </div>
-                <p class="u-catch-sub">世の中の仮想通貨トレンドを見る</p>
+                <a href="{{ route('twitter.coin_trend') }}"><p class="u-catch-sub">世の中の仮想通貨トレンドを見る</p></a>
             </li>
             <li class="p-start__item u-fade-up">
                 <div class="u-catch">
                     <p>Google<br class="text-sp">ニュース</p>
                 </div>
-                <p class="u-catch-sub">Google仮想通貨ニュースを見る</p>
+                <a href="{{ route('google.news') }}"><p class="u-catch-sub">Google仮想通貨ニュースを見る</p></a>
             </li>
         </ul>
 
