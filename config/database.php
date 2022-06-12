@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Str;
 
+$db = parse_url(env('DATABASE_URL'));
+
 return [
 
     /*
@@ -46,12 +48,12 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => $db['host'],
             'port' => env('DB_PORT', '8889'),
-            'database' => env('DB_DATABASE', 'coin_trend'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'root'),
-            'unix_socket' => env('/Applications/MAMP/tmp/mysql/mysql.sock'),
+            'database' => ltrim($db["path"], '/'),
+            'username' => $db['user'],
+            'password' => $db['pass'],
+            'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
