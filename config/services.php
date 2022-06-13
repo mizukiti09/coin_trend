@@ -31,11 +31,11 @@ return [
     ],
 
     "twitter" => [
-        "client_id" => env("TWITTER_AUTH_CLIENT_ID"),
-        "client_secret" => env("TWITTER_AUTH_CLIENT_SECRET"),
-        "access_token" => env("TWITTER_ACCESS_TOKEN"),
-        "access_token_secret" => env("TWITTER_ACCESS_TOKEN_SECRET"),
-        "redirect" => env("CALLBACK_URL"),
+        "client_id" => 'xsYUt3hlynQz7ttyllsSHWsFK',
+        "client_secret" => 'MbjjhM4eM7a8kz0Gzca8xKwO6mrkDk3kmzPmO0QIOQkHyjHt0B',
+        "access_token" => '1506369696261877762-nLoZgIHJGgaXutNdSEFG29kaGW4kXf',
+        "access_token_secret" => 'ZpeW6PyhK7hFmAhMM3eS23dF5RoHdjrmzEbCyKpXDC9rk',
+        "redirect" => 'https://coin-trend.herokuapp.com/login/twitter/callback',
     ],
 
 ];
