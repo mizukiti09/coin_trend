@@ -14,8 +14,8 @@ class AddAccessTokenAndAccessTokenSecretToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('access_token')->after('auto_follow_flg')->default(null);
-            $table->string('access_token_secret')->after('access_token')->default(null);
+            $table->string('access_token')->after('auto_follow_flg')->nullable()->default(null);
+            $table->string('access_token_secret')->after('access_token')->nullable()->default(null);
         });
     }
 
