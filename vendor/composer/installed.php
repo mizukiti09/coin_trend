@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6019695a3a889d566f800ab96e029b171708ab2f',
+        'reference' => '821b1136dee44e6786ff7db004c14ed48a1e4dd1',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -376,7 +376,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6019695a3a889d566f800ab96e029b171708ab2f',
+            'reference' => '821b1136dee44e6786ff7db004c14ed48a1e4dd1',
             'dev_requirement' => false,
         ),
         'laravel/sanctum' => array(
@@ -730,8 +730,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
