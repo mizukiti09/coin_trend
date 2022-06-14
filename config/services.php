@@ -30,20 +30,20 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    // "twitter" => [
-    //     "client_id" => env('TWITTER_AUTH_CLIENT_ID'),
-    //     "client_secret" => env('TWITTER_AUTH_CLIENT_SECRET'),
-    //     "access_token" => env('TWITTER_ACCESS_TOKEN'),
-    //     "access_token_secret" => env('TWITTER_ACCESS_TOKEN_SECRET'),
-    //     "redirect" => env('CALLBACK_URL'),
-    // ],
     "twitter" => [
-        "client_id" => 'm6bpOUCsmDLHy5VeRVynins89',
-        "client_secret" => 'IFKNuc6mYjqlf3JEYoH9RljMf9AnsVt21BWx2GL9v4oGxQ5OVI',
-        "access_token" => '1506369696261877762-Ly3XQ22dOwguilCdhiKRnRpSZVNWUf',
-        "access_token_secret" => 'FReklyxGAMLSHmlSY6e2JOACsQfwt4By99XcoDE1KxMOp',
-        "redirect" => 'https://coin-trend.herokuapp.com/login/twitter/callback
-        ',
+        "client_id" => env('TWITTER_AUTH_CLIENT_ID'),
+        "client_secret" => env('TWITTER_AUTH_CLIENT_SECRET'),
+        "access_token" => env('TWITTER_ACCESS_TOKEN'),
+        "access_token_secret" => env('TWITTER_ACCESS_TOKEN_SECRET'),
+        "redirect" => env('CALLBACK_URL'),
     ],
+    // "twitter" => [
+    //     "client_id" => 'm6bpOUCsmDLHy5VeRVynins89',
+    //     "client_secret" => 'IFKNuc6mYjqlf3JEYoH9RljMf9AnsVt21BWx2GL9v4oGxQ5OVI',
+    //     "access_token" => '1506369696261877762-Ly3XQ22dOwguilCdhiKRnRpSZVNWUf',
+    //     "access_token_secret" => 'FReklyxGAMLSHmlSY6e2JOACsQfwt4By99XcoDE1KxMOp',
+    //     "redirect" => 'https://coin-trend.herokuapp.com/login/twitter/callback
+    //     ',
+    // ],
 
 ];
