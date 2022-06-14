@@ -38,10 +38,10 @@ return [
     //     "redirect" => env('CALLBACK_URL'),
     // ],
     "twitter" => [
-        "client_id" => 'RzhBRjgtQVlZRVBfaGpDZUgxMnc6MTpjaQ',
-        "client_secret" => 'RUZ3yX8fkwZTJubt_RUEwuXB8fbb_0UEX7YC_n_5IioZETXs_E',
-        "access_token" => '1506369696261877762-38yZelui47WYC1lEc7GmFh5zK3eY8M',
-        "access_token_secret" => 'TX4GSrmSnRM6Qqb0sp0n3i3YAh3IxAyhjoz39Fj6PZEaH',
+        "client_id" => 'm6bpOUCsmDLHy5VeRVynins89',
+        "client_secret" => 'IFKNuc6mYjqlf3JEYoH9RljMf9AnsVt21BWx2GL9v4oGxQ5OVI',
+        "access_token" => '1506369696261877762-Ly3XQ22dOwguilCdhiKRnRpSZVNWUf',
+        "access_token_secret" => 'FReklyxGAMLSHmlSY6e2JOACsQfwt4By99XcoDE1KxMOp',
         "redirect" => 'https://coin-trend.herokuapp.com/login/twitter/callback
         ',
     ],
