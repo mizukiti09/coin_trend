@@ -29,11 +29,11 @@ class TwitterAuthInteractor implements TwitterAuthUseCaseInterface
      */
     public function loginRedirectProvider()
     {
-        try {
-            return Socialite::driver('twitter')->redirect();
-        } catch (Exception $e) {
-            return redirect()->route('twitter.follow.follow_wait');
-        }
+        // try {
+        return Socialite::driver('twitter')->redirect();
+        // } catch (Exception $e) {
+        //     return redirect()->route('twitter.follow.follow_wait');
+        // }
     }
     /**
      * Twitterからユーザー情報を取得(Callback先)
@@ -41,16 +41,16 @@ class TwitterAuthInteractor implements TwitterAuthUseCaseInterface
     public function loginHandleProviderCallback()
     {
 
-        try {
-            $twitterAuth = Twitter::connectUserAuth();
+        // try {
+        $twitterAuth = Twitter::connectUserAuth();
 
-            $this->twitterAuthRepository->save($twitterAuth);
-            Log::info('Twitterから取得しました。', ['user' => $twitterAuth]);
-            Auth::login(Auth::user());
-            return redirect()->route('twitter.follow');
-        } catch (Exception $e) {
-            return redirect()->route('twitter.follow.follow_wait');
-        }
+        $this->twitterAuthRepository->save($twitterAuth);
+        Log::info('Twitterから取得しました。', ['user' => $twitterAuth]);
+        Auth::login(Auth::user());
+        return redirect()->route('twitter.follow');
+        // } catch (Exception $e) {
+        //     return redirect()->route('twitter.follow.follow_wait');
+        // }
     }
 
     // twitter　認証解除
