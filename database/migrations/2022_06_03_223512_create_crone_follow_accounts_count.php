@@ -28,6 +28,6 @@ class CreateCroneFollowAccountsCount extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('crone_follow_accounts_counts');
+        Schema::dropIfExists('crone_follow_accounts_count');
     }
 }
