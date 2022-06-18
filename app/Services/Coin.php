@@ -259,7 +259,7 @@ class Coin
 
     private function coinTweetsData($sinceTime, $untilTime, $loopNumber)
     {
-        $search_key = '"仮想通貨" OR "cryptocurrency"';
+        $search_key = '"仮想通貨"';
 
         $tweet_results = Twitter::tweetsData($search_key, $sinceTime, $untilTime, $loopNumber);
 
