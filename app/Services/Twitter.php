@@ -113,7 +113,7 @@ class Twitter
         date_default_timezone_set('Asia/Tokyo'); //https://blog.codecamp.jp/php-datetime参考
 
         // 取得オプション
-        $options = array('q' => $searchKey, 'lang' => 'ja', 'count' => 100, 'result_type' => 'resent', 'since' => $sinceTime, 'until' => $untilTime,);
+        $options = array('q' => $searchKey, 'lang' => 'en', 'count' => 100, 'result_type' => 'resent', 'since' => $sinceTime, 'until' => $untilTime,);
         // 取得
         $request_loop = $loopNumber;
         $tweet_results = array();
