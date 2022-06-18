@@ -259,7 +259,7 @@ class Coin
 
     private function coinTweetsData($sinceTime, $untilTime, $loopNumber)
     {
-        $search_key = '"仮想通貨BTC" OR "仮想通貨ETH" OR "仮想通貨ETC" OR "仮想通貨LISK" OR "仮想通貨XRP" OR "仮想通貨XEM" OR "仮想通貨LTC" OR "仮想通貨BCH" OR "仮想通貨MONA" OR "仮想通貨XLM" OR "仮想通貨QTUM" 
+        $search_key = '"仮想通貨" OR "仮想通貨BTC" OR "仮想通貨ETH" OR "仮想通貨ETC" OR "仮想通貨LISK" OR "仮想通貨XRP" OR "仮想通貨XEM" OR "仮想通貨LTC" OR "仮想通貨BCH" OR "仮想通貨MONA" OR "仮想通貨XLM" OR "仮想通貨QTUM" 
         OR "仮想通貨BAT" OR "仮想通貨IOST" OR "仮想通貨ENJ" OR "仮想通貨OMG" OR "仮想通貨PLT" OR "仮想通貨XYM" OR "仮想通貨DASH" OR "仮想通貨ZEC" OR "仮想通貨XMR" OR "仮想通貨REP" OR "仮想通貨FCT"
         ';
 
