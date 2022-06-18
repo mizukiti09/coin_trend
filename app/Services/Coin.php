@@ -259,8 +259,8 @@ class Coin
 
     private function coinTweetsData($sinceTime, $untilTime, $loopNumber)
     {
-        $search_key = '"cryptocurrency" OR "Btc" OR "Eth" OR "Etc" OR "Lisk" OR "Xrp" OR "Xem" OR "Ltc" OR "Bch" OR "Mona" OR "Xlm" OR "Qtum" 
-        OR "Bat" OR "Iost" OR "Enj" OR "Omg" OR "Plt" OR "Xym" OR "Dash" OR "Zec" OR "Xmr" OR "Rep" OR "Fct"
+        $search_key = '"cryptocurrency" OR "BTC" OR "ETH" OR "ETC" OR "LISK" OR "XRP" OR "XEM" OR "LTC" OR "BCH" OR "MONA" OR "XLM" OR "QTUM" 
+        OR "BAT" OR "IOST" OR "ENJ" OR "OMG" OR "PLT" OR "XYM" OR "DASH" OR "ZEC" OR "XMR" OR "REP" OR "FCT"
         ';
 
         $tweet_results = Twitter::tweetsData($search_key, $sinceTime, $untilTime, $loopNumber);
