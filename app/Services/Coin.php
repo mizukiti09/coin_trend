@@ -259,7 +259,7 @@ class Coin
 
     private function coinTweetsData($sinceTime, $untilTime, $loopNumber)
     {
-        $search_key = '"仮想通貨" OR "cryptocurrency" OR "crypto" OR "BTC" OR "ETH" OR "ETC" OR "LISK" OR "XRP" OR "XEM" OR "LTC" OR "BCH" OR "MONA" OR "XLM" OR "QTUM" 
+        $search_key = '"cryptocurrency" OR "crypto" OR "BTC" OR "ETH" OR "ETC" OR "LISK" OR "XRP" OR "XEM" OR "LTC" OR "BCH" OR "MONA" OR "XLM" OR "QTUM" 
         OR "BAT" OR "IOST" OR "ENJ" OR "OMG" OR "PLT" OR "XYM" OR "DASH" OR "ZEC" OR "XMR" OR "REP" OR "FCT"
         ';
 
