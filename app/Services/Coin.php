@@ -259,8 +259,8 @@ class Coin
 
     private function coinTweetsData($sinceTime, $untilTime, $loopNumber)
     {
-        $search_key = '"仮想通貨" OR "BTC" OR "ETH" OR "ETC" OR "LISK" OR "XRP" OR "XEM" OR "LTC" OR "BCH" OR "MONA" OR "XLM" OR "QTUM" 
-        OR "BAT" OR "IOST" OR "ENJ" OR "OMG" OR "PLT" OR "XYM" OR "DASH" OR "ZEC" OR "XMR" OR "REP" OR "FCT"
+        $search_key = '"仮想通貨" OR "#BTC" OR "#ETH" OR "#ETC" OR "#LISK" OR "#XRP" OR "#XEM" OR "#LTC" OR "#BCH" OR "#MONA" OR "#XLM" OR "#QTUM" 
+        OR "#BAT" OR "#IOST" OR "#ENJ" OR "#OMG" OR "#PLT" OR "#XYM" OR "#DASH" OR "#ZEC" OR "#XMR" OR "#REP" OR "#FCT"
         ';
 
         $tweet_results = Twitter::tweetsData($search_key, $sinceTime, $untilTime, $loopNumber);
@@ -269,7 +269,7 @@ class Coin
 
         //一致するテキストがあればカウントアップ
         for ($i = 0; $i < $count; $i++) {
-            if (stristr($tweet_results[$i]['text'], "BTC") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#BTC") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->btcTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -278,7 +278,7 @@ class Coin
                     $this->btcTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "ETH") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#ETH") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->ethTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -287,7 +287,7 @@ class Coin
                     $this->ethTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "ETC") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#ETC") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->etcTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -296,7 +296,7 @@ class Coin
                     $this->etcTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "LISK") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#LISK") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->lskTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -305,7 +305,7 @@ class Coin
                     $this->lskTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "XRP") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#XRP") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->xrpTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -314,7 +314,7 @@ class Coin
                     $this->xrpTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "XEM") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#XEM") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->xemTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -323,7 +323,7 @@ class Coin
                     $this->xemTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "LTC") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#LTC") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->ltcTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -332,7 +332,7 @@ class Coin
                     $this->ltcTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "BCH") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#BCH") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->bchTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -341,7 +341,7 @@ class Coin
                     $this->bchTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "MONA") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#MONA") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->monaTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -350,7 +350,7 @@ class Coin
                     $this->monaTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "XLM") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#XLM") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->xlmTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -359,7 +359,7 @@ class Coin
                     $this->xlmTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "QTUM") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#QTUM") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->qtumTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -368,7 +368,7 @@ class Coin
                     $this->qtumTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "BAT") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#BAT") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->batTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -377,7 +377,7 @@ class Coin
                     $this->batTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "IOST") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#IOST") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->iostTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -386,7 +386,7 @@ class Coin
                     $this->iostTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "ENJ") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#ENJ") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->enjTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -395,7 +395,7 @@ class Coin
                     $this->enjTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "OMG") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#OMG") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->omgTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -404,7 +404,7 @@ class Coin
                     $this->omgTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "PLT") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#PLT") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->pltTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -413,7 +413,7 @@ class Coin
                     $this->pltTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "XYM") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#XYM") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->xymTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -422,7 +422,7 @@ class Coin
                     $this->xymTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "DASH") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#DASH") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->dashTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -431,7 +431,7 @@ class Coin
                     $this->dashTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "ZEC") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#ZEC") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->zecTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -440,7 +440,7 @@ class Coin
                     $this->zecTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "XMR") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#XMR") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->xmrTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -449,7 +449,7 @@ class Coin
                     $this->xmrTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "REP") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#REP") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->repTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
@@ -458,7 +458,7 @@ class Coin
                     $this->repTweetWeekAgo++;
                 }
             }
-            if (stristr($tweet_results[$i]['text'], "FCT") !== false) {
+            if (stristr($tweet_results[$i]['text'], "#FCT") !== false) {
                 if ($sinceTime === $this->hourAgoTime) {
                     $this->fctTweetHourAgo++;
                 } elseif ($sinceTime === $this->dayAgoTime) {
